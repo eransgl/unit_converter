@@ -1,13 +1,13 @@
-package com.example.unitconverter.ui.Length
+package com.example.unit_converter.ui.area
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class LengthViewModel : ViewModel() {
+class AreaViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+        value = "This is area Fragment"
     }
     val text: LiveData<String> = _text
 }

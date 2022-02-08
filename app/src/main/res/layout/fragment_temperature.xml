@@ -1,115 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/temperatureContainer"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:visibility="visible"
-    tools:context=".ui.temperature.TemperatureFragment">
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:paddingBottom="100dp"
+    android:visibility="visible">
 
     <TextView
-        android:id="@+id/title_temperature"
+        android:id="@+id/text_temperature"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="10dp"
-        android:text="@string/title_temperature"
+        android:layout_weight="1"
         android:textAlignment="center"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.19" />
+        android:visibility="visible" />
 
-    <ImageView
-        android:id="@+id/SymbolMetric"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="50dp"
-        android:contentDescription="@string/metric_symbol_description"
-        android:src="@drawable/metric"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/title_temperature"
-        app:layout_constraintEnd_toStartOf="@+id/SymbolUsa"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+    <LinearLayout
+        android:id="@+id/inputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="651dp"
+        android:layout_weight="5"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:visibility="visible">
 
-    <ImageView
-        android:id="@+id/SymbolUsa"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="50dp"
-        android:contentDescription="@string/usa_symbol_description"
-        android:src="@drawable/usa"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/title_temperature"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/SymbolMetric"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        <LinearLayout
+            android:id="@+id/inputMetricLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/metric_long"
+            android:backgroundTintMode="multiply"
+            android:backgroundTint="@color/material_on_primary_disabled"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp">
 
-    <EditText
-        android:id="@+id/InputMetric"
-        android:layout_width="167dp"
-        android:layout_height="89dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="10dp"
-        android:ems="10"
-        android:hint="@string/input_celsius"
-        android:inputType="numberSigned|number|numberDecimal"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColorHint="#757575"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/InputUsa"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_temperature"
-        android:autofillHints="" />
+            <EditText
+                android:id="@+id/InputMetricCelsius"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:autofillHints="Number"
+                android:ems="10"
+                android:hint="@string/input_temperature_celsius"
+                android:inputType="numberSigned|number|numberDecimal"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColorHint="#757575"
+                android:textSize="16sp"
+                android:visibility="visible" />
+        </LinearLayout>
 
-    <EditText
-        android:id="@+id/InputUsa"
-        android:layout_width="167dp"
-        android:layout_height="89dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="20dp"
-        android:ems="10"
-        android:hint="@string/input_fahrnheit"
-        android:inputType="numberSigned|number|numberDecimal"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColorHint="#757575"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.636"
-        app:layout_constraintStart_toEndOf="@+id/InputMetric"
-        app:layout_constraintTop_toBottomOf="@+id/title_temperature"
-        android:autofillHints="" />
+        <LinearLayout
+            android:id="@+id/inputUsaLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/usa_long"
+            android:backgroundTintMode="multiply"
+            android:backgroundTint="@color/material_on_primary_disabled"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp">
+
+            <EditText
+                android:id="@+id/InputUsaFahrenheit"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:autofillHints="Number"
+                android:ems="10"
+                android:hint="@string/input_temperature_fahrenheit"
+                android:inputType="numberSigned|number|numberDecimal"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColorHint="#757575"
+                android:textSize="16sp"
+                android:visibility="visible" />
+        </LinearLayout>
+    </LinearLayout>
 
     <Button
         android:id="@+id/clearButton"
-        android:layout_width="102dp"
-        android:layout_height="85dp"
-        android:layout_marginStart="145dp"
-        android:layout_marginTop="292dp"
-        android:layout_marginEnd="145dp"
-        android:layout_marginBottom="59dp"
+        android:layout_width="80dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         android:text="@string/clear_button_text"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/InputMetric" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:visibility="visible" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

@@ -1,17 +1,16 @@
-package com.example.unitconverter.ui.Length
+package com.example.unit_converter.ui.length
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.unitconverter.Dimensions.*
-import com.example.unitconverter.databinding.FragmentLengthBinding
+import com.example.unit_converter.Dimensions.*
+import com.example.unit_converter.databinding.FragmentLengthBinding
 
 class LengthFragment : Fragment() {
 
@@ -34,7 +33,7 @@ class LengthFragment : Fragment() {
         val root: View = binding.root
 
         val textView: TextView = binding.textLength
-        lengthViewModel.text.observe(viewLifecycleOwner, Observer {
+        lengthViewModel.titleText.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
 
@@ -43,36 +42,23 @@ class LengthFragment : Fragment() {
 
         val unitHandler: UnitValueContainerHandler = UnitValueContainerHandler(
             listOf(
-                UnitValueContainer(binding.InputMetricCentiMeter, LengthUnit.CentiMeter),
+                UnitValueContainer(binding.InputMetricCentimeter, LengthUnit.CentiMeter),
                 UnitValueContainer(binding.InputMetricMeter, LengthUnit.Meter),
                 UnitValueContainer(binding.InputMetricKiloMeter, LengthUnit.KiloMeter),
-                UnitValueContainer(binding.inputUsaInch, LengthUnit.Inch),
+                UnitValueContainer(binding.InputUsaInch, LengthUnit.Inch),
                 UnitValueContainer(binding.InputUsaFoot, LengthUnit.Foot),
-                UnitValueContainer(binding.inputUsaYard, LengthUnit.Yard),
-                UnitValueContainer(binding.inputUsaMile, LengthUnit.Mile)
+                UnitValueContainer(binding.InputUsaYard, LengthUnit.Yard),
+                UnitValueContainer(binding.InputUsaMile, LengthUnit.Mile)
             )
         )
 
-        clearButton.setOnClickListener(View.OnClickListener { v ->
+        clearButton.setOnClickListener(View.OnClickListener { _ ->
             run {
                 unitHandler.clearAll()
             }
         })
 
-        unitHandler.containers.forEach {
-            container ->
-            run {
-                container.editText.setOnEditorActionListener(TextView.OnEditorActionListener { textView, i, keyEvent ->
-                    run {
-                        unitHandler.getContainerOf(textView).updateValueFromInput()
-                        unitHandler.convertFrom(textView)
-                        unitHandler.getContainerOf(textView).updateInputFromValue()
-                        true
-                    }
-                    false
-                })
-            }
-        }
+        unitHandler.initOnEditorActionListeners()
 
         return root
     }

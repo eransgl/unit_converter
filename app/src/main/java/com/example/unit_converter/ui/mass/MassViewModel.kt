@@ -1,13 +1,13 @@
-package com.example.unitconverter.ui.dashboard
+package com.example.unit_converter.ui.mass
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class DashboardViewModel : ViewModel() {
+class MassViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is dashboard Fragment"
+        value = "This is mass Fragment"
     }
     val text: LiveData<String> = _text
 }

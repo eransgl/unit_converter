@@ -1,4 +1,4 @@
-package com.example.unitconverter
+package com.example.unit_converter
 
 import android.icu.text.MeasureFormat
 import android.icu.text.MeasureFormat.FormatWidth
@@ -8,6 +8,9 @@ import android.icu.util.MeasureUnit.*
 import android.icu.util.ULocale
 import android.widget.EditText
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import java.util.logging.Level
 import java.util.logging.Logger
 import kotlin.math.pow
@@ -32,7 +35,7 @@ enum class Dimensions {
         fun getSystem(): System
     }
 
-    class UnitValueContainerHandler(val containers: List<UnitValueContainer>) {
+    class UnitValueContainerHandler(private val containers: List<UnitValueContainer>) {
 //        fun getListOfSystem(system: System): List<UnitValueContainer> {
 //            val systemList: MutableList<UnitValueContainer> = mutableListOf<UnitValueContainer>()
 //            for (con in containers) {
@@ -43,7 +46,29 @@ enum class Dimensions {
 //            return systemList
 //        }
 
-        fun getContainerOf(textView: TextView): UnitValueContainer {
+
+//        val inputMetric: EditText = binding.InputMetric
+//        temperatureViewModel.inputMetricText.observe(viewLifecycleOwner, Observer {
+//            inputMetric.text = it
+//        })
+
+        fun initOnEditorActionListeners() {
+            this.containers.forEach {
+                    unitContainer ->
+                run {
+                    unitContainer.editText.setOnEditorActionListener(TextView.OnEditorActionListener { textView, _, _ ->
+                        run {
+                            this.getContainerOf(textView).updateValueFromInput()
+                            this.convertFrom(textView)
+                            true
+                        }
+                        false
+                    })
+                }
+            }
+        }
+
+        private fun getContainerOf(textView: TextView): UnitValueContainer {
             for (con in containers) {
                 if (con.editText.id == textView.id) {
                     return con
@@ -58,28 +83,34 @@ enum class Dimensions {
         private fun convertFrom(otherUnitContainer: UnitValueContainer) {
             containers.forEach { container ->
                 run {
-                    container.convertFrom(otherUnitContainer)
+                    if (container !== otherUnitContainer) {
+                        container.convertFrom(otherUnitContainer)
+                    }
                 }
             }
         }
 
-        fun convertFrom(textView: TextView) {
+        private fun convertFrom(textView: TextView) {
             convertFrom(getContainerOf(textView))
         }
 
         fun clearAll() {
-            for (con in containers) {
-                con.editText.text.clear()
-            }
+            containers.forEach { con -> con.clearText() }
         }
     }
 
     class UnitValueContainer(val editText: EditText, private val unit: DimensionUnit) {
+        fun initObserver(liveData: LiveData<String>, fragment: Fragment) {
+            liveData.observe(fragment.viewLifecycleOwner, Observer {
+                editText.setText(it)
+            })
+        }
+
         private val logger: Logger = Logger.getLogger("dimensionsLogger")
 
         private var standardizedValue: Double = 0.0
 
-        private val formatter: MeasureFormat = MeasureFormat.getInstance(ULocale.US, FormatWidth.NARROW)
+        private val formatter: MeasureFormat = MeasureFormat.getInstance(ULocale.US, FormatWidth.SHORT)
 
         private fun parse(value: Double): String {
             return formatter.formatMeasures(Measure(value, unit.getMeasureUnit())).toString()
@@ -93,28 +124,35 @@ enum class Dimensions {
             return getInputText().toDoubleOrNull() ?: 0.0
         }
 
-        fun updateInputFromValue() {
-//            val parsedText = if (this.unit.getDimension() == TEMPERATURE) {
-//                this.parse(this.standardizedValue)
-//            } else {
-//                this.parse(this.unit.convertToThis(this.standardizedValue))
-//            }
-            this.editText.setText(this.parse(this.standardizedValue))
-            logger.log(Level.INFO, "UnitContainer(unit[${unit}]).updateInputFromValue(${this.parse(this.standardizedValue)}) -> currentInput[${editText.text}]")
+        fun clearText() {
+            this.editText.text.clear()
+            logger.log(Level.INFO, "UnitContainer(unit[${unit}]).editText.text.clear()")
+        }
 
+        private fun updateInputFromValue() {
+//            val converted: Double = this.unit.convertToThis(this.standardizedValue)
+            this.editText.setText(this.parse(this.standardizedValue))
+            logger.log(Level.INFO, "UnitContainer(unit[${unit}]).updateInputFromValue(standardizedValue[${this.parse(this.standardizedValue)}] -> currentInput[${getInputText()}]")
+
+        }
+
+        private fun parseInput() {
+            logger.log(Level.INFO, "UnitContainer(unit[${unit}]).parseInput(${this.getInputText()}) -> parsed[${this.parse(this.getInputNumber())}]")
+            this.editText.setText(this.parse(this.getInputNumber()))
         }
 
         fun updateValueFromInput() {
-            logger.log(Level.INFO, "UnitContainer(unit[${unit}]).updateValueFromInput(${getInputNumber()})")
+            logger.log(Level.INFO, "UnitContainer(unit[${unit}]).updateValueFromInput(${getInputNumber()}) -> standardizedValue[${standardizedValue}]")
             this.standardizedValue = this.unit.convertToStandard(getInputNumber())
+            parseInput()
         }
 
         fun convertFrom(otherUnitContainer: UnitValueContainer) {
-            if (this.unit.getDimension() != otherUnitContainer.unit.getDimension()) {
+            if (this.unit.getDimension() !== otherUnitContainer.unit.getDimension()) {
                 throw Error("Trying to convert different dimensions unit[${otherUnitContainer.unit}] of dimension[${otherUnitContainer.unit.getDimension()}] to unit[${this.unit}] of dimension[${this.unit.getDimension()}]")
             }
+
             val otherValue: Double = otherUnitContainer.standardizedValue
-//            val standardizedOtherValue: Double = otherUnitContainer.unit.convertToStandard(otherValue)
             logger.log(Level.INFO, "UnitContainer(unit[${unit}]).convertFrom(otherUnit[${otherUnitContainer.unit}], otherValue[${otherValue}])")
             this.standardizedValue = unit.convertToThis(otherValue)
             updateInputFromValue()
@@ -179,7 +217,7 @@ enum class Dimensions {
         }
     }
 
-    enum class MassUnit(private val system: System, private val measureUnit: MeasureUnit, private val dimension: Dimensions, val toKG: Double): DimensionUnit {
+    enum class MassUnit(private val system: System, private val measureUnit: MeasureUnit, private val dimension: Dimensions, private val toKG: Double): DimensionUnit {
         Gram(System.METRIC, GRAM, MASS, 0.001),
         KiloGram(System.METRIC, KILOGRAM, MASS, 1.0),
         MetricTon(System.METRIC, METRIC_TON, MASS, 1000.0),
@@ -211,12 +249,12 @@ enum class Dimensions {
     enum class AreaUnit(private val system: System, private val measureUnit: MeasureUnit, private val dimension: Dimensions, private val toSquareMeter: Double): DimensionUnit {
         SquareMeter(System.METRIC, SQUARE_METER, AREA, 1.0),
 //        Dunam(System.METRIC, DUNAM, AREA, 1000.0),
-        SquareKM(System.METRIC, SQUARE_KILOMETER, AREA, LengthUnit.KiloMeter.toMeter.pow(2)),
+        SquareKilometer(System.METRIC, SQUARE_KILOMETER, AREA, LengthUnit.KiloMeter.toMeter.pow(2)),
         SquareInch(System.USA, SQUARE_INCH, AREA, LengthUnit.Inch.toMeter.pow(2)),
         SquareFoot(System.USA, SQUARE_FOOT, AREA,  LengthUnit.Foot.toMeter.pow(2)),
         SquareYard(System.USA, SQUARE_YARD, AREA,  LengthUnit.Yard.toMeter.pow(2)),
         Acre(System.USA, ACRE, AREA,  4046.8564224),
-        Section(System.USA, SQUARE_MILE, AREA, LengthUnit.Mile.toMeter.pow(2));
+        SquareMile(System.USA, SQUARE_MILE, AREA, LengthUnit.Mile.toMeter.pow(2));
 
         override fun getMeasureUnit(): MeasureUnit {
             return this.measureUnit
@@ -246,11 +284,12 @@ enum class Dimensions {
         CubicInch(System.USA, CUBIC_INCH, VOLUME, LengthUnit.Inch.toMeter.pow(3)),
         CubicFoot(System.USA, CUBIC_FOOT, VOLUME, LengthUnit.Foot.toMeter.pow(3)),
         CubicYard(System.USA, CUBIC_YARD, VOLUME, LengthUnit.Yard.toMeter.pow(3)),
-        USFluidOunce(System.USA, FLUID_OUNCE, VOLUME,VolumeUnit.USGallon.toKiloLiter / 128),
-        USCup(System.USA, CUP, VOLUME, VolumeUnit.USGallon.toKiloLiter / 16),
-        USPint(System.USA, PINT, VOLUME, VolumeUnit.USGallon.toKiloLiter / 8),
-        USQuart(System.USA, QUART, VOLUME, VolumeUnit.USGallon.toKiloLiter / 4),
-        USGallon(System.USA, GALLON, VOLUME, LengthUnit.Inch.toMeter.pow(3) * 231);
+        USGallon(System.USA, GALLON, VOLUME, LengthUnit.Inch.toMeter.pow(3) * 231),
+        USFluidOunce(System.USA, FLUID_OUNCE, VOLUME, USGallon.toKiloLiter / 128),
+        USCup(System.USA, CUP, VOLUME, USGallon.toKiloLiter / 16),
+        USPint(System.USA, PINT, VOLUME, USGallon.toKiloLiter / 8),
+        USQuart(System.USA, QUART, VOLUME, USGallon.toKiloLiter / 4);
+
 
         override fun getMeasureUnit(): MeasureUnit {
             return this.measureUnit

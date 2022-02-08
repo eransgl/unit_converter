@@ -1,4 +1,4 @@
-package com.example.unitconverter
+package com.example.unit_converter
 
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -7,7 +7,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.unitconverter.databinding.ActivityMainBinding
+import com.example.unit_converter.databinding.ActivityMainBinding
+//import java.util.logging.Logger
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,12 +22,21 @@ class MainActivity : AppCompatActivity() {
 
         val navView: BottomNavigationView = binding.navView
 
+
+//        val logger: Logger = Logger.getLogger("MainActivityLogger")
+//        logger.log(Level.INFO, "R.id.nav_host_fragment[${R.id.nav_host_fragment_activity_main}], binding.navHostFragment.id[${binding.navHostFragmentActivityMain.id}]")
+//
+//        val navHostFragment: NavController = findNavController(binding.navHostFragment.id)
+
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
+
+
+
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_temperature, R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
+                R.id.navigation_temperature, R.id.navigation_mass, R.id.navigation_length, R.id.navigation_area, R.id.navigation_volume
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

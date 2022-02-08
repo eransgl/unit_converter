@@ -1,20 +1,16 @@
-package com.example.unitconverter.ui.temperature
+package com.example.unit_converter.ui.temperature
 
-import android.icu.util.Measure
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.unitconverter.Dimensions.*
-import com.example.unitconverter.databinding.FragmentTemperatureBinding
-import java.util.logging.Level
-import java.util.logging.Logger
+import com.example.unit_converter.Dimensions.*
+import com.example.unit_converter.Dimensions.TemperatureUnit.*
+import com.example.unit_converter.databinding.FragmentTemperatureBinding
 
 class TemperatureFragment : Fragment() {
 
@@ -25,29 +21,29 @@ class TemperatureFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private val logger: Logger = Logger.getLogger("temperatureFragmentLogger")
+//    private val logger: Logger = Logger.getLogger("temperatureFragmentLogger")
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        temperatureViewModel = ViewModelProvider(this).get(TemperatureViewModel::class.java)
+    ): View {
+        temperatureViewModel = ViewModelProvider(this)[TemperatureViewModel::class.java]
 
         _binding = FragmentTemperatureBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.titleTemperature
-        temperatureViewModel.titleText.observe(viewLifecycleOwner, Observer {
+        val textView: TextView = binding.textTemperature
+        temperatureViewModel.titleText.observe(viewLifecycleOwner) {
             textView.text = it
-        })
+        }
 
-        val inputMetric: EditText = binding.InputMetric
+//        val inputMetric: EditText = binding.InputMetric
 //        temperatureViewModel.inputMetricText.observe(viewLifecycleOwner, Observer {
 //            inputMetric.text = it
 //        })
 
-        val inputUsa: EditText = binding.InputUsa
+//        val inputUsa: EditText = binding.InputUsa
 //        temperatureViewModel.inputUSAText.observe(viewLifecycleOwner, Observer {
 //            inputMetric.text = it
 //        })
@@ -57,8 +53,13 @@ class TemperatureFragment : Fragment() {
 //            direction.isChecked = it
 //        })
 
-        val celsiusValue = UnitValueContainer(inputMetric, TemperatureUnit.Celsius)
-        val fahrenheitValue = UnitValueContainer(inputUsa, TemperatureUnit.Fahrenheit)
+        val unitHandler = UnitValueContainerHandler(
+            listOf(
+                UnitValueContainer(binding.InputMetricCelsius, Celsius),
+                UnitValueContainer(binding.InputUsaFahrenheit, Fahrenheit)
+            )
+        )
+
 
 //        fun getUpdatedInput(textView: TextView): Double {
 //            val textString: String = textView.text.toString()
@@ -76,33 +77,29 @@ class TemperatureFragment : Fragment() {
 //            resultInput.setText(converterUnit.convertParse(getInput(textView)), TextView.BufferType.NORMAL)
 //        }
 
-        fun clearAllInput() {
-            inputMetric.text.clear();
-            inputUsa.text.clear();
-            logger.log(Level.INFO, "clearAllInput()")
-        }
-
-        clearButton.setOnClickListener(View.OnClickListener { v ->
+        clearButton.setOnClickListener {
             run {
-                clearAllInput();
+                unitHandler.clearAll()
             }
-        })
-
-        inputMetric.setOnEditorActionListener(TextView.OnEditorActionListener {v, keyCode, event ->
-            run {
-                celsiusValue.updateValueFromInput()
-                fahrenheitValue.convertFrom(celsiusValue)
-                celsiusValue.updateInputFromValue()
-            true
         }
-            false
-        })
 
-        inputUsa.setOnEditorActionListener(TextView.OnEditorActionListener {v, keyCode, event ->
-            run {
-                fahrenheitValue.updateValueFromInput()
-                celsiusValue.convertFrom(fahrenheitValue )
-                fahrenheitValue.updateInputFromValue()
+        unitHandler.initOnEditorActionListeners()
+//
+//        inputMetric.setOnEditorActionListener(TextView.OnEditorActionListener {v, keyCode, event ->
+//            run {
+//                celsiusValue.updateValueFromInput()
+//                fahrenheitValue.convertFrom(celsiusValue)
+//                celsiusValue.updateInputFromValue()
+//            true
+//        }
+//            false
+//        })
+
+//        inputUsa.setOnEditorActionListener(TextView.OnEditorActionListener {v, keyCode, event ->
+//            run {
+//                fahrenheitValue.updateValueFromInput()
+//                celsiusValue.convertFrom(fahrenheitValue )
+//                fahrenheitValue.updateInputFromValue()
 //        inputUsa.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
 //            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
                 //Perform Code
@@ -112,10 +109,10 @@ class TemperatureFragment : Fragment() {
 //                val resultInput: EditText = inputMetric;
 //                convert(v, convertUnit, resultInput);
 
-                true
-            }
-            false
-        })
+//                true
+//            }
+//            false
+//        })
 
         return root
     }

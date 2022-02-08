@@ -1,21 +1,53 @@
 <resources>
     <string name="app_name">UnitConverter</string>
     <string name="title_length">Length</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_mass">Mass</string>
+    <string name="title_area">Area</string>
+    <string name="title_volume">Volume</string>
     <string name="title_temperature">Temperature</string>
-    <string name="input_celsius">Celsius value here</string>
-    <string name="input_fahrnheit">Fahrenheit value here</string>
-    <string name="input_centimeter">Centimeter value here</string>
-    <string name="input_meter">Meter value here</string>
-    <string name="input_kilometer">Kilometer value here</string>
-    <string name="input_inch">Inch value here</string>
-    <string name="input_foot">Foot value here</string>
-    <string name="input_yard">Yard value here</string>
-    <string name="input_mile">Mile value here</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="metric_symbol_description">Metric symbol</string>
     <string name="usa_symbol_description">USA symbol</string>
     <string name="clear_button_text">Clear</string>
-</resources>
+
+
+    <string name="input_temperature_celsius">Celsius value here</string>
+    <string name="input_temperature_fahrenheit">Fahrenheit value here</string>
+
+    <string name="input_mass_gram">Gram value here</string>
+    <string name="input_mass_kilogram">Kilogram value here</string>
+    <string name="input_mass_metric_ton">Metric Ton value here</string>
+    <string name="input_mass_ounce">Ounce value here</string>
+    <string name="input_mass_pound">Pound value here</string>
+    <string name="input_mass_short_ton">Short Ton value here</string>
+
+    <string name="input_length_centimeter">Centimeter value here</string>
+    <string name="input_length_meter">Meter value here</string>
+    <string name="input_length_kilometer">Kilometer value here</string>
+    <string name="input_length_inch">Inch value here</string>
+    <string name="input_length_foot">Foot value here</string>
+    <string name="input_length_yard">Yard value here</string>
+    <string name="input_length_mile">Mile value here</string>
+    <string name="input_area_square_centimeter">Sq. Centimeter value here</string>
+    <string name="input_area_dunam">Dunam value here</string>
+    <string name="input_area_square_kilometer">Sq. Kilometer value here</string>
+    <string name="input_area_square_foot">Sq. Foot value here</string>
+    <string name="input_area_acre">Acre value here</string>
+    <string name="input_area_square_mile">Sq. Mile value here</string>
+    <string name="input_area_square_yard">Sq. Yard value here</string>
+    <string name="input_area_square_inch">Sq. Inch value here</string>
+
+    <string name="input_volume_milliliter">Milliliter value here</string>
+    <string name="input_volume_liter">Liter value here</string>
+    <string name="input_volume_kiloliter">Kiloliter value here</string>
+    <string name="input_volume_cubic_inch">Cubic Inch value here</string>
+    <string name="input_volume_cubic_foot">Cubic Foot value here</string>
+    <string name="input_volume_cubic_yard">Cubic Yard value here</string>
+    <string name="input_volume_us_gallon">Gallon value here</string>
+    <string name="input_volume_fluid_ounce">Fluid Ounce value here</string>
+    <string name="input_volume_us_cup">Cup value here</string>
+    <string name="input_volume_us_pint">Pint value here</string>
+    <string name="input_volume_us_quart">Quart value here</string>
+
+    =</resources>

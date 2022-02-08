@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/lengthContainer"
+    android:id="@+id/volumeContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
@@ -12,7 +12,7 @@
     android:visibility="visible">
 
     <TextView
-        android:id="@+id/text_length"
+        android:id="@+id/text_volume"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="8dp"
@@ -47,7 +47,7 @@
             android:paddingRight="4dp">
 
             <EditText
-                android:id="@+id/InputMetricCentimeter"
+                android:id="@+id/InputMetricMilliLiter"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="10dp"
@@ -56,7 +56,7 @@
                 android:layout_marginBottom="10dp"
                 android:autofillHints="Number"
                 android:ems="10"
-                android:hint="@string/input_length_centimeter"
+                android:hint="@string/input_volume_milliliter"
                 android:inputType="numberSigned|number|numberDecimal"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColorHint="#757575"
@@ -64,7 +64,7 @@
                 android:visibility="visible" />
 
             <EditText
-                android:id="@+id/InputMetricMeter"
+                android:id="@+id/InputMetricLiter"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="10dp"
@@ -73,7 +73,7 @@
                 android:layout_marginBottom="10dp"
                 android:autofillHints="Number"
                 android:ems="10"
-                android:hint="@string/input_length_meter"
+                android:hint="@string/input_volume_liter"
                 android:inputType="numberSigned|number|numberDecimal"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColorHint="#757575"
@@ -81,7 +81,7 @@
                 android:visibility="visible" />
 
             <EditText
-                android:id="@+id/InputMetricKiloMeter"
+                android:id="@+id/InputMetricSquareKiloLiter"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="10dp"
@@ -90,12 +90,12 @@
                 android:layout_marginBottom="10dp"
                 android:autofillHints="Number"
                 android:ems="10"
-                android:hint="@string/input_length_kilometer"
+                android:hint="@string/input_volume_kiloliter"
                 android:inputType="numberSigned|number|numberDecimal"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColorHint="#757575"
                 android:textSize="16sp"
-                android:visibility="visible" />
+                android:visibility="invisible" />
 
 
         </LinearLayout>
@@ -113,7 +113,7 @@
             android:paddingRight="4dp">
 
             <EditText
-                android:id="@+id/InputUsaInch"
+                android:id="@+id/InputUsaFluidOunce"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="10dp"
@@ -122,7 +122,7 @@
                 android:layout_marginBottom="10dp"
                 android:autofillHints="Number"
                 android:ems="10"
-                android:hint="@string/input_length_inch"
+                android:hint="@string/input_volume_fluid_ounce"
                 android:inputType="numberSigned|number|numberDecimal"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColorHint="#757575"
@@ -130,7 +130,7 @@
                 android:visibility="visible" />
 
             <EditText
-                android:id="@+id/InputUsaFoot"
+                android:id="@+id/InputUsaCup"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="10dp"
@@ -139,7 +139,7 @@
                 android:layout_marginBottom="10dp"
                 android:autofillHints="Number"
                 android:ems="10"
-                android:hint="@string/input_length_foot"
+                android:hint="@string/input_volume_us_cup"
                 android:inputType="numberSigned|number|numberDecimal"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColorHint="#757575"
@@ -147,7 +147,7 @@
                 android:visibility="visible" />
 
             <EditText
-                android:id="@+id/InputUsaYard"
+                android:id="@+id/InputUsaPint"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="10dp"
@@ -156,7 +156,7 @@
                 android:layout_marginBottom="10dp"
                 android:autofillHints="Number"
                 android:ems="10"
-                android:hint="@string/input_length_yard"
+                android:hint="@string/input_volume_us_pint"
                 android:inputType="numberSigned|number|numberDecimal"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColorHint="#757575"
@@ -164,7 +164,7 @@
                 android:visibility="visible" />
 
             <EditText
-                android:id="@+id/InputUsaMile"
+                android:id="@+id/InputUsaQuart"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
                 android:layout_marginStart="10dp"
@@ -173,7 +173,24 @@
                 android:layout_marginBottom="10dp"
                 android:autofillHints="Number"
                 android:ems="10"
-                android:hint="@string/input_length_mile"
+                android:hint="@string/input_volume_us_quart"
+                android:inputType="numberSigned|number|numberDecimal"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColorHint="#757575"
+                android:textSize="16sp"
+                android:visibility="visible" />
+
+            <EditText
+                android:id="@+id/InputUsaGallon"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:autofillHints="Number"
+                android:ems="10"
+                android:hint="@string/input_volume_us_gallon"
                 android:inputType="numberSigned|number|numberDecimal"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColorHint="#757575"
