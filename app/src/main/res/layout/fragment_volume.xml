@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/volumeContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -38,13 +39,17 @@
             android:id="@+id/inputMetricLayout"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@drawable/metric_long"
-            android:backgroundTintMode="multiply"
-            android:backgroundTint="@color/material_on_primary_disabled"
             android:gravity="center"
             android:orientation="vertical"
             android:paddingLeft="4dp"
             android:paddingRight="4dp">
+
+            <ImageView
+                android:id="@+id/soccer6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/soccer"
+                app:srcCompat="@drawable/two_tone_sports_soccer_24" />
 
             <EditText
                 android:id="@+id/InputMetricMilliLiter"
@@ -57,7 +62,9 @@
                 android:autofillHints="Number"
                 android:ems="10"
                 android:hint="@string/input_volume_milliliter"
+                android:textAlignment="center"
                 android:inputType="numberSigned|number|numberDecimal"
+                android:imeOptions="actionDone"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColorHint="#757575"
                 android:textSize="16sp"
@@ -74,28 +81,46 @@
                 android:autofillHints="Number"
                 android:ems="10"
                 android:hint="@string/input_volume_liter"
+                android:textAlignment="center"
                 android:inputType="numberSigned|number|numberDecimal"
+                android:imeOptions="actionDone"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColorHint="#757575"
                 android:textSize="16sp"
                 android:visibility="visible" />
 
-            <EditText
-                android:id="@+id/InputMetricSquareKiloLiter"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
-                android:autofillHints="Number"
-                android:ems="10"
-                android:hint="@string/input_volume_kiloliter"
-                android:inputType="numberSigned|number|numberDecimal"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textColorHint="#757575"
-                android:textSize="16sp"
-                android:visibility="invisible" />
+            <ImageView
+                android:id="@+id/soccer10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/soccer"
+                app:srcCompat="@drawable/two_tone_sports_soccer_24" />
+
+            <!--            <ImageView-->
+<!--                android:id="@+id/soccer7"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:contentDescription="@string/soccer"-->
+<!--                android:src="@drawable/two_tone_sports_soccer_24"-->
+<!--                android:visibility="invisible" />-->
+
+<!--            <EditText-->
+<!--                android:id="@+id/InputMetricSquareKiloLiter"-->
+<!--                android:layout_width="150dp"-->
+<!--                android:layout_height="50dp"-->
+<!--                android:layout_marginStart="10dp"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:layout_marginEnd="10dp"-->
+<!--                android:layout_marginBottom="10dp"-->
+<!--                android:autofillHints="Number"-->
+<!--                android:ems="10"-->
+<!--                android:hint="@string/input_volume_kiloliter"-->
+<!--                android:inputType="numberSigned|number|numberDecimal"
+                android:imeOptions="actionDone"-->
+<!--                android:textAppearance="@style/TextAppearance.AppCompat.Small"-->
+<!--                android:textColorHint="#757575"-->
+<!--                android:textSize="16sp"-->
+<!--                android:visibility="invisible" />-->
 
 
         </LinearLayout>
@@ -104,13 +129,17 @@
             android:id="@+id/inputUsaLayout"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:background="@drawable/usa_long"
-            android:backgroundTintMode="multiply"
-            android:backgroundTint="@color/material_on_primary_disabled"
             android:gravity="center"
             android:orientation="vertical"
             android:paddingLeft="4dp"
             android:paddingRight="4dp">
+
+            <ImageView
+                android:id="@+id/football11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/football"
+                app:srcCompat="@drawable/two_tone_sports_football_24" />
 
             <EditText
                 android:id="@+id/InputUsaFluidOunce"
@@ -123,7 +152,9 @@
                 android:autofillHints="Number"
                 android:ems="10"
                 android:hint="@string/input_volume_fluid_ounce"
+                android:textAlignment="center"
                 android:inputType="numberSigned|number|numberDecimal"
+                android:imeOptions="actionDone"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColorHint="#757575"
                 android:textSize="16sp"
@@ -140,7 +171,9 @@
                 android:autofillHints="Number"
                 android:ems="10"
                 android:hint="@string/input_volume_us_cup"
+                android:textAlignment="center"
                 android:inputType="numberSigned|number|numberDecimal"
+                android:imeOptions="actionDone"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColorHint="#757575"
                 android:textSize="16sp"
@@ -157,7 +190,9 @@
                 android:autofillHints="Number"
                 android:ems="10"
                 android:hint="@string/input_volume_us_pint"
+                android:textAlignment="center"
                 android:inputType="numberSigned|number|numberDecimal"
+                android:imeOptions="actionDone"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColorHint="#757575"
                 android:textSize="16sp"
@@ -174,7 +209,9 @@
                 android:autofillHints="Number"
                 android:ems="10"
                 android:hint="@string/input_volume_us_quart"
+                android:textAlignment="center"
                 android:inputType="numberSigned|number|numberDecimal"
+                android:imeOptions="actionDone"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColorHint="#757575"
                 android:textSize="16sp"
@@ -191,11 +228,20 @@
                 android:autofillHints="Number"
                 android:ems="10"
                 android:hint="@string/input_volume_us_gallon"
+                android:textAlignment="center"
                 android:inputType="numberSigned|number|numberDecimal"
+                android:imeOptions="actionDone"
                 android:textAppearance="@style/TextAppearance.AppCompat.Small"
                 android:textColorHint="#757575"
                 android:textSize="16sp"
                 android:visibility="visible" />
+
+            <ImageView
+                android:id="@+id/football14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/football"
+                app:srcCompat="@drawable/two_tone_sports_football_24" />
 
 
         </LinearLayout>
@@ -203,14 +249,14 @@
 
     <Button
         android:id="@+id/clearButton"
-        android:layout_width="80dp"
-        android:layout_height="60dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
-        android:text="@string/clear_button_text"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:visibility="visible" />
+        android:visibility="visible"
+        android:background="@drawable/two_tone_delete_black_48"
+        />
 
 </LinearLayout>

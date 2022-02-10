@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.unit_converter.Dimensions
 import com.example.unit_converter.Dimensions.AreaUnit.*
@@ -27,16 +26,15 @@ class AreaFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        areaViewModel =
-            ViewModelProvider(this).get(AreaViewModel::class.java)
+        areaViewModel = ViewModelProvider(this)[AreaViewModel::class.java]
 
         _binding = FragmentAreaBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textArea
-        areaViewModel.text.observe(viewLifecycleOwner, Observer {
+        areaViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
-        })
+        }
 
         val clearButton: Button = binding.clearButton
 
@@ -53,11 +51,11 @@ class AreaFragment : Fragment() {
                 )
             )
 
-        clearButton.setOnClickListener(View.OnClickListener { _ ->
+        clearButton.setOnClickListener {
             run {
                 unitHandler.clearAll()
             }
-        })
+        }
 
         unitHandler.initOnEditorActionListeners()
 

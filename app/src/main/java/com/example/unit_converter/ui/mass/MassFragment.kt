@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.unit_converter.Dimensions
 import com.example.unit_converter.Dimensions.MassUnit.*
@@ -28,15 +27,15 @@ class MassFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         massViewModel =
-            ViewModelProvider(this).get(MassViewModel::class.java)
+            ViewModelProvider(this)[MassViewModel::class.java]
 
         _binding = FragmentMassBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textMass
-        massViewModel.text.observe(viewLifecycleOwner, Observer {
+        massViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
-        })
+        }
 
         val clearButton: Button = binding.clearButton
 
@@ -52,11 +51,11 @@ class MassFragment : Fragment() {
                 )
             )
 
-        clearButton.setOnClickListener(View.OnClickListener { _ ->
+        clearButton.setOnClickListener {
             run {
                 unitHandler.clearAll()
             }
-        })
+        }
 
         unitHandler.initOnEditorActionListeners()
 

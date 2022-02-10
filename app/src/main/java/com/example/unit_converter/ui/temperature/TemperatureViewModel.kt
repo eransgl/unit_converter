@@ -18,6 +18,7 @@ class TemperatureViewModel : ViewModel() {
 //        value = "@string/input_fahrenheit"
 //    }
 
+
     val titleText: LiveData<String> = _titleText
 //    val inputCelsiusText: LiveData<String> = _inputCelsiusText
 //    val inputFahrenheitText: LiveData<String> = _inputFahrenheitText

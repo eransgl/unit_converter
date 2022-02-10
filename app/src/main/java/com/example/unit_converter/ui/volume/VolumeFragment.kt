@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.unit_converter.Dimensions
 import com.example.unit_converter.databinding.FragmentVolumeBinding
@@ -27,15 +26,15 @@ class VolumeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         volumeViewModel =
-            ViewModelProvider(this).get(VolumeViewModel::class.java)
+            ViewModelProvider(this)[VolumeViewModel::class.java]
 
         _binding = FragmentVolumeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textVolume
-        volumeViewModel.text.observe(viewLifecycleOwner, Observer {
+        volumeViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
-        })
+        }
 
         val clearButton: Button = binding.clearButton
 
@@ -51,11 +50,11 @@ class VolumeFragment : Fragment() {
             )
         )
 
-        clearButton.setOnClickListener(View.OnClickListener { _ ->
+        clearButton.setOnClickListener {
             run {
                 unitHandler.clearAll()
             }
-        })
+        }
 
         unitHandler.initOnEditorActionListeners()
 

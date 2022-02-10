@@ -12,17 +12,16 @@
         tools:layout="@layout/fragment_temperature" />
 
     <fragment
-            android:id="@+id/navigation_mass"
-            android:name="com.example.unit_converter.ui.mass.MassFragment"
-            android:label="@string/title_mass"
-            tools:layout="@layout/fragment_mass" />
+        android:id="@+id/navigation_mass"
+        android:name="com.example.unit_converter.ui.mass.MassFragment"
+        android:label="@string/title_mass"
+        tools:layout="@layout/fragment_mass" />
 
     <fragment
         android:id="@+id/navigation_length"
         android:name="com.example.unit_converter.ui.length.LengthFragment"
         android:label="@string/title_length"
         tools:layout="@layout/fragment_length" />
-
 
     <fragment
         android:id="@+id/navigation_area"

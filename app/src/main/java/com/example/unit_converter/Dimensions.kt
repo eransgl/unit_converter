@@ -10,7 +10,6 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import java.util.logging.Level
 import java.util.logging.Logger
 import kotlin.math.pow
@@ -56,14 +55,14 @@ enum class Dimensions {
             this.containers.forEach {
                     unitContainer ->
                 run {
-                    unitContainer.editText.setOnEditorActionListener(TextView.OnEditorActionListener { textView, _, _ ->
+                    unitContainer.editText.setOnEditorActionListener { textView, _, _ ->
                         run {
                             this.getContainerOf(textView).updateValueFromInput()
                             this.convertFrom(textView)
                             true
                         }
                         false
-                    })
+                    }
                 }
             }
         }
@@ -101,9 +100,9 @@ enum class Dimensions {
 
     class UnitValueContainer(val editText: EditText, private val unit: DimensionUnit) {
         fun initObserver(liveData: LiveData<String>, fragment: Fragment) {
-            liveData.observe(fragment.viewLifecycleOwner, Observer {
+            liveData.observe(fragment.viewLifecycleOwner) {
                 editText.setText(it)
-            })
+            }
         }
 
         private val logger: Logger = Logger.getLogger("dimensionsLogger")
@@ -249,6 +248,7 @@ enum class Dimensions {
     enum class AreaUnit(private val system: System, private val measureUnit: MeasureUnit, private val dimension: Dimensions, private val toSquareMeter: Double): DimensionUnit {
         SquareMeter(System.METRIC, SQUARE_METER, AREA, 1.0),
 //        Dunam(System.METRIC, DUNAM, AREA, 1000.0),
+//        TODO: adopt or discard Dunam
         SquareKilometer(System.METRIC, SQUARE_KILOMETER, AREA, LengthUnit.KiloMeter.toMeter.pow(2)),
         SquareInch(System.USA, SQUARE_INCH, AREA, LengthUnit.Inch.toMeter.pow(2)),
         SquareFoot(System.USA, SQUARE_FOOT, AREA,  LengthUnit.Foot.toMeter.pow(2)),
@@ -281,9 +281,10 @@ enum class Dimensions {
         MilliLiter(System.METRIC, MILLILITER, VOLUME, LengthUnit.CentiMeter.toMeter.pow(3)),
         Liter(System.METRIC, LITER, VOLUME, LengthUnit.Decimeter.toMeter.pow(3) ),
 //        KiloLiter(System.METRIC, KILOLITER, LengthUnit.Meter.toMeter.pow(3)),
-        CubicInch(System.USA, CUBIC_INCH, VOLUME, LengthUnit.Inch.toMeter.pow(3)),
-        CubicFoot(System.USA, CUBIC_FOOT, VOLUME, LengthUnit.Foot.toMeter.pow(3)),
-        CubicYard(System.USA, CUBIC_YARD, VOLUME, LengthUnit.Yard.toMeter.pow(3)),
+//        TODO: adopt or discard Kiloliter
+//        CubicInch(System.USA, CUBIC_INCH, VOLUME, LengthUnit.Inch.toMeter.pow(3)),
+//        CubicFoot(System.USA, CUBIC_FOOT, VOLUME, LengthUnit.Foot.toMeter.pow(3)),
+//        CubicYard(System.USA, CUBIC_YARD, VOLUME, LengthUnit.Yard.toMeter.pow(3)),
         USGallon(System.USA, GALLON, VOLUME, LengthUnit.Inch.toMeter.pow(3) * 231),
         USFluidOunce(System.USA, FLUID_OUNCE, VOLUME, USGallon.toKiloLiter / 128),
         USCup(System.USA, CUP, VOLUME, USGallon.toKiloLiter / 16),

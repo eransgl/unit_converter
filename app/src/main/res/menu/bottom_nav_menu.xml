@@ -3,26 +3,26 @@
 
     <item
         android:id="@+id/navigation_temperature"
-        android:icon="@drawable/baseline_thermostat_24"
+        android:icon="@drawable/two_tone_thermostat_black_24"
         android:title="@string/title_temperature" />
 
     <item
         android:id="@+id/navigation_mass"
-        android:icon="@drawable/baseline_scale_24"
+        android:icon="@drawable/two_tone_scale_black_24"
         android:title="@string/title_mass" />
 
     <item
         android:id="@+id/navigation_length"
-        android:icon="@drawable/baseline_height_24"
+        android:icon="@drawable/two_tone_straighten_black_24"
         android:title="@string/title_length" />
 
     <item
         android:id="@+id/navigation_area"
-        android:icon="@drawable/baseline_grid_4x4_24"
+        android:icon="@drawable/two_tone_grid_on_black_24"
         android:title="@string/title_area" />
 
     <item
         android:id="@+id/navigation_volume"
-        android:icon="@drawable/baseline_layers_24"
+        android:icon="@drawable/twotone_view_in_ar_black_24"
         android:title="@string/title_volume" />
 </menu>

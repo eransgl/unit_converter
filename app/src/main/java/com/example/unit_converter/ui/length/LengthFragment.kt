@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.unit_converter.Dimensions.*
 import com.example.unit_converter.databinding.FragmentLengthBinding
@@ -27,20 +26,20 @@ class LengthFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         lengthViewModel =
-            ViewModelProvider(this).get(LengthViewModel::class.java)
+            ViewModelProvider(this)[LengthViewModel::class.java]
 
         _binding = FragmentLengthBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textLength
-        lengthViewModel.titleText.observe(viewLifecycleOwner, Observer {
+        lengthViewModel.titleText.observe(viewLifecycleOwner) {
             textView.text = it
-        })
+        }
 
         val clearButton: Button = binding.clearButton
 
 
-        val unitHandler: UnitValueContainerHandler = UnitValueContainerHandler(
+        val unitHandler = UnitValueContainerHandler(
             listOf(
                 UnitValueContainer(binding.InputMetricCentimeter, LengthUnit.CentiMeter),
                 UnitValueContainer(binding.InputMetricMeter, LengthUnit.Meter),
@@ -52,11 +51,11 @@ class LengthFragment : Fragment() {
             )
         )
 
-        clearButton.setOnClickListener(View.OnClickListener { _ ->
+        clearButton.setOnClickListener {
             run {
                 unitHandler.clearAll()
             }
-        })
+        }
 
         unitHandler.initOnEditorActionListeners()
 

@@ -8,7 +8,8 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.unit_converter.databinding.ActivityMainBinding
-//import java.util.logging.Logger
+
+// TODO: 08/02/2022 define what happens in rotation
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,17 +22,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val navView: BottomNavigationView = binding.navView
-
-
-//        val logger: Logger = Logger.getLogger("MainActivityLogger")
-//        logger.log(Level.INFO, "R.id.nav_host_fragment[${R.id.nav_host_fragment_activity_main}], binding.navHostFragment.id[${binding.navHostFragmentActivityMain.id}]")
-//
-//        val navHostFragment: NavController = findNavController(binding.navHostFragment.id)
+//         TODO: change BottomNavigationView to cyclic scroll that can be moved from anywhere on the screen
+//          It can be HorizontalScrollView with same navigation bar as now
+//          Or it can be HorizontalScrollView with RecyclerVie
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
+
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-
 
 
         val appBarConfiguration = AppBarConfiguration(
@@ -41,5 +40,6 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
     }
 }
